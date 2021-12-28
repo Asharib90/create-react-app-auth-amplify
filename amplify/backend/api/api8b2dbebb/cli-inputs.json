@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/post": {
+      "name": "/post",
+      "lambdaFunction": "createreactappautham569336e0",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
