@@ -1,6 +1,6 @@
 const postUpdate=(connection)=>(req,res)=>{ 
   
-  const {id,title,slug,link,description,excerpt,featuredImage,oldFeaturedImage,featured,date,category,author,tags, seo}=req.body
+  const {id,title,slug,link,contentTable,description,excerpt,featuredImage,oldFeaturedImage,featured,date,category,author,tags, seo}=req.body
   const newDate = new Date();
    
     const filter = {}
@@ -8,9 +8,9 @@ const postUpdate=(connection)=>(req,res)=>{
     title? filter['title']=title : 0
     slug? filter['slug']=slug : filter['slug']='/'+title.toLowerCase().split(' ').join('-')
     link? filter['link']=null : filter['link']=null
+    contentTable? filter['contentTable']=contentTable :0
     description? filter['description']=description : 0
     excerpt? filter['excerpt']=excerpt : 0
-   
     featuredImage? filter['featuredImage']=featuredImage : 0
     featured? filter['featured']=featured : filter['featured']=featured
     date? 0: filter['date'] = newDate.getFullYear()+'-'+(newDate.getMonth()+1)+'-'+newDate.getDate() 

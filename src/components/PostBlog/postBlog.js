@@ -52,6 +52,7 @@ function PostBlog(){
       const [title, setTitle] = React.useState('');
       const [slug, setSlug] = React.useState('');
       const [link, setLink] = React.useState('');
+      const [contentTable, setContentTable]=React.useState('');
       const [excerpt, setExcerpt] = React.useState('');
       const [featuredImage, setFeaturedImage] = React.useState("");
       const [featured, setFeatured] = React.useState('');
@@ -96,6 +97,7 @@ function PostBlog(){
                 "title": title,
                 "slug": slug,
                 "link": link,
+                "contentTable":contentTable,
                 "description": convertedContent,
                 "excerpt": excerpt,
                 "featuredImage": "https://starnewsformbbd4e22507e44405a64778be964267bd130756-dev.s3.us-east-2.amazonaws.com/public/"+file.name,
@@ -157,6 +159,10 @@ function PostBlog(){
            <br/>
            <label className="labelClass">Link: </label>
            <input className="inputClass" type="text" name="link" onChange={event => setLink(event.target.value)}/>
+           <br/>
+           <label className="labelClass">Table of Contents</label>
+           <textarea className="inputClass" name="content_table" onChange={event => setContentTable(event.target.value)}></textarea>
+        
            <br/>
            <label>Description: <span className="spanClass">*</span></label>
       

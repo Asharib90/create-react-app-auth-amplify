@@ -46,6 +46,9 @@ function ViewBlogs() {
          // document.getElementById("blogForm").reset();
           // setLoader(false)
          setSuccess('Record has been successfully deleted');
+         const dataCopy = [...posts];
+         dataCopy.splice(index, 1);
+         updatePosts(dataCopy);
        
           //setEditorState(EditorState.createEmpty());
         });
@@ -77,7 +80,7 @@ function ViewBlogs() {
                 <>
                    <Link className="btn btn-info edit"  to={'/view/'+s.post_id}><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.241 3.83a1 1 0 0 1-.07 1.412L6.866 14.565 6.387 16h1.226l10.714-9.74a1 1 0 0 1 1.346 1.48l-11 10A1 1 0 0 1 8 18H5a1 1 0 0 1-.949-1.316l1-3a1 1 0 0 1 .278-.426l10.5-9.5a1 1 0 0 1 1.412.071zM4 21a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1z" fill="#000"/><path fill-rule="evenodd" clip-rule="evenodd" d="M15.793 3.793a1 1 0 0 1 1.414 0l2.5 2.5a1 1 0 0 1-1.414 1.414l-2.5-2.5a1 1 0 0 1 0-1.414zM15.293 9.707l-2.5-2.5 1.414-1.414 2.5 2.5-1.414 1.414z" fill="#000"/></svg>Edit</Link>
                    {/* {if(window.confirm('Are you sure to delete this record?')){ this.deleteHandler(item.id)};}} */}
-                    <button className='delete' raised primary onClick={(e,index) => {deletePost(s.post_id,s.sno)}}><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 7a1 1 0 0 1 1 1v11a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8a1 1 0 1 1 2 0v11a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V8a1 1 0 0 1 1-1z" fill="#000"/><path fill-rule="evenodd" clip-rule="evenodd" d="M10 8a1 1 0 0 1 1 1v8a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1zM14 8a1 1 0 0 1 1 1v8a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1zM4 5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1zM8 3a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1z" fill="#000"/></svg>Delete</button>
+                    <button className='delete' raised primary onClick={(e,index) => {if(window.confirm('Are you sure to delete this record?'))deletePost(s.post_id,s.sno)}}><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 7a1 1 0 0 1 1 1v11a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8a1 1 0 1 1 2 0v11a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V8a1 1 0 0 1 1-1z" fill="#000"/><path fill-rule="evenodd" clip-rule="evenodd" d="M10 8a1 1 0 0 1 1 1v8a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1zM14 8a1 1 0 0 1 1 1v8a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1zM4 5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1zM8 3a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1z" fill="#000"/></svg>Delete</button>
                 </>
             ),
             ignoreRowClick: true,

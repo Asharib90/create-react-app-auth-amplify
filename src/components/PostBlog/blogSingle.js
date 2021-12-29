@@ -52,6 +52,7 @@ function BlogSingle(props){
       const [title, setTitle] = React.useState();
       const [slug, setSlug] = React.useState('');
       const [link, setLink] = React.useState('');
+      const [contentTable, setContentTable]=React.useState('');
       const [excerpt, setExcerpt] = React.useState('');
       const [featuredImage, setFeaturedImage] = React.useState("");
       const [oldFeaturedImage, setOldFeaturedImage] = React.useState("");
@@ -102,6 +103,7 @@ function BlogSingle(props){
              setTitle(json.title)
              setSlug(json.slug)
              setLink(json.link)
+             setContentTable(json.contentTable)
              setExcerpt(json.excerpt)
              setFeatured(json.featured)
              setOldFeaturedImage(json.featuredImage)
@@ -159,7 +161,7 @@ function BlogSingle(props){
           {
             FeaturedImage="https://starnewsformbbd4e22507e44405a64778be964267bd130756-dev.s3.us-east-2.amazonaws.com/public/"+file.name
           }
-         fetch('http://localhost:3001/post',{
+         fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post',{
              method:"PUT",
              headers: {
                 'Content-Type': 'application/json'
@@ -170,6 +172,7 @@ function BlogSingle(props){
                 "title": title,
                 "slug": slug,
                 "link": link,
+                "contentTable":contentTable,
                 "description": convertedContent,
                 "excerpt": excerpt,
                 // "featuredImage": "https://starnewsformbbd4e22507e44405a64778be964267bd130756-dev.s3.us-east-2.amazonaws.com/public/"+file.name,
@@ -252,6 +255,10 @@ function BlogSingle(props){
            <br/>
            <label className="labelClass">Link: </label>
            <input className="inputClass" type="text" name="link" value={link} onChange={event => setLink(event.target.value)}/>
+           <br/>
+           <label className="labelClass">Table of Contents</label>
+           <textarea className="inputClass" name="content_table" onChange={event => setContentTable(event.target.value)} value={contentTable}></textarea>
+        
            <br/>
            <label>Description: <span className="spanClass">*</span></label>
       
