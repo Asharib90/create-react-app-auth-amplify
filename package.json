@@ -3,20 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "aws-amplify": "^4.2.0",
     "@aws-amplify/ui-react": "^1.2.6",
     "@inovua/reactdatagrid-enterprise": "^4.5.7",
+    "aws-amplify": "^4.2.0",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
+    "react": "^16.13.1",
     "react-data-table-component": "^7.4.6",
     "react-data-table-component-extensions": "^1.5.2",
-    "react-draft-wysiwyg": "^1.14.7",
-    "styled-components": "^5.3.3",
-    "web-vitals": "^2.1.2",
-    "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-draft-wysiwyg": "^1.14.7",
     "react-router-dom": "^6.2.1",
-    "react-scripts": "^4.0.3"
+    "react-scripts": "^4.0.3",
+    "styled-components": "^5.3.3",
+    "web-vitals": "^2.1.2"
   },
   "resolutions": {
     "set-value": "^2.0.1",
