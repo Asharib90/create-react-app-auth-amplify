@@ -1,8 +1,28 @@
 {
   "auth": {
-    "cognitocf0c6096": {
+    "createreactappauthamda657e79": {
       "service": "Cognito",
-      "providerPlugin": "awscloudformation"
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      }
     }
   },
   "function": {
@@ -23,6 +43,23 @@
           "attributes": [
             "Name",
             "Arn"
+          ]
+        }
+      ]
+    }
+  },
+  "storage": {
+    "s3a992a8e4": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "createreactappautham569336e0",
+          "attributes": [
+            "Name",
+            "Arn",
+            "LambdaExecutionRole"
           ]
         }
       ]

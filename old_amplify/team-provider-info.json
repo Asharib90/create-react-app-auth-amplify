@@ -12,15 +12,15 @@
       "AmplifyAppId": "dtgguekqbpk7r"
     },
     "categories": {
+      "auth": {
+        "cognitocf0c6096": {},
+        "true": {}
+      },
       "function": {
         "createreactappautham569336e0": {
           "deploymentBucketName": "amplify-authcra-devi-133830-deployment",
-          "s3Key": "amplify-builds/createreactappautham569336e0-4568714f735351703749-build.zip"
+          "s3Key": "amplify-builds/createreactappautham569336e0-68336c3658536e384e65-build.zip"
         }
-      },
-      "auth": {
-        "true": {},
-        "createreactappauthamda657e79": {}
       }
     }
   }

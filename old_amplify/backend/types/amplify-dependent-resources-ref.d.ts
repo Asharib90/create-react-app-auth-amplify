@@ -1,14 +1,13 @@
 export type AmplifyDependentResourcesAttributes = {
     "auth": {
-        "createreactappauthamda657e79": {
+        "cognitocf0c6096": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
-            "UserPoolArn": "string",
             "UserPoolName": "string",
             "AppClientIDWeb": "string",
             "AppClientID": "string",
-            "CreatedSNSRole": "string"
+            "AppClientSecret": "string"
         }
     },
     "function": {
@@ -24,12 +23,6 @@ export type AmplifyDependentResourcesAttributes = {
             "RootUrl": "string",
             "ApiName": "string",
             "ApiId": "string"
-        }
-    },
-    "storage": {
-        "s3a992a8e4": {
-            "BucketName": "string",
-            "Region": "string"
         }
     }
 }

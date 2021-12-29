@@ -1,0 +1,7 @@
+{
+  "devi": {
+    "configLevel": "project",
+    "useProfile": true,
+    "profileName": "default"
+  }
+}

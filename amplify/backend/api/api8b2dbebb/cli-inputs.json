@@ -7,13 +7,6 @@
       "permissions": {
         "setting": "open"
       }
-    },
-    "/form": {
-      "name": "/form",
-      "lambdaFunction": "createreactappautham569336e0",
-      "permissions": {
-        "setting": "open"
-      }
     }
   }
 }

@@ -1,0 +1,14 @@
+{
+  "resourceName": "s3a992a8e4",
+  "policyUUID": "a992a8e4",
+  "bucketName": "createreactappautham774c4af455b14a6da80642ef720",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "createreactappautham569336e0",
+  "groupAccess": {}
+}
