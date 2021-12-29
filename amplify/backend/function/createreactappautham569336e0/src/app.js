@@ -40,6 +40,16 @@ const connection = MongoClient.connect('mongodb+srv://starmarketing:Crystalball0
  { useUnifiedTopology: true })
 
 
+
+// Enable CORS for all methods
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Methods", "*")
+  res.header("Access-Control-Allow-Headers", "*")
+  res.header("Access-Control-Allow-Credentials", true)
+  next()
+});
+
 var i=1
 app.post('/form',async(req, res) => {
     try {
@@ -62,17 +72,6 @@ app.get('/form',async(req, res) => {
         res.status(500).json({err:"Something went wrong"})
     }
 })
-
-// Enable CORS for all methods
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Methods", "*")
-  res.header("Access-Control-Allow-Headers", "*")
-  res.header("Access-Control-Allow-Credentials", true)
-  next()
-});
-
-
 /**********************
  * Example get method *
  **********************/

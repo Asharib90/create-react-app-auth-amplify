@@ -18,7 +18,7 @@
       "function": {
         "createreactappautham569336e0": {
           "deploymentBucketName": "amplify-authcra-devi-133830-deployment",
-          "s3Key": "amplify-builds/createreactappautham569336e0-634e4236365763567555-build.zip"
+          "s3Key": "amplify-builds/createreactappautham569336e0-5656326a2b6b65365072-build.zip"
         }
       }
     }
