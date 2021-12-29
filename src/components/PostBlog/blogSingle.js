@@ -159,7 +159,7 @@ function BlogSingle(props){
           }  
           else
           {
-            FeaturedImage="https://starnewsformbbd4e22507e44405a64778be964267bd130756-dev.s3.us-east-2.amazonaws.com/public/"+file.name
+            FeaturedImage="https://createreactappautham774c4af455b14a6da80642ef720133830-devi.s3.us-east-2.amazonaws.com/public/"+file.name
           }
          fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post',{
              method:"PUT",

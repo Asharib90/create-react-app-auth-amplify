@@ -6,7 +6,11 @@ import PostBlog from "./components/PostBlog/postBlog";
 import ViewBlogs from './components/viewBlogs/viewBlogs';
 import BlogSingle from './components/PostBlog/blogSingle';
 import Form from './components/form';
+import awsconfig from './aws-exports';
+import Amplify from 'aws-amplify';
 
+
+Amplify.configure(awsconfig);
 
 function App(props) {
   // Storage.put("test.txt", "Hello");
