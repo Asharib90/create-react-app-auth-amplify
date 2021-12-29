@@ -15,7 +15,7 @@ function Form() {
   const [compData, setCompData] = useState([]);
   const [compColumn, setColumn] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:3001/form').then(response => response.json())
+    fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/form').then(response => response.json())
     .then(data =>{
       
       const tempArray = []

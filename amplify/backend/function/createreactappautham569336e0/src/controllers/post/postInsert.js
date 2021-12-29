@@ -1,5 +1,4 @@
 const { response } = require("express");
-const fetch = require ("node-fetch");
 
 const filter = {}
 const  postInsert=(connection)=>(req,res)=>{ 
@@ -35,42 +34,42 @@ const  postInsert=(connection)=>(req,res)=>{
    
     .then(results => {
     try {
-      if(req.body.category==1)
-      {
+      // if(req.body.category==1)
+      // {
         
-        fetch('https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            id: '052d5733-d21f-4a42-8bcd-21261c279e04',
-            token: '3UAXRi5Kfw1Dky3Q1dgBAkRCV6JtNiXM56X8emphtbE',
-          })
+      // //   fetch('https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks', {
+      // //     method: 'POST',
+      // //     headers: {
+      // //       'Accept': 'application/json',
+      // //       'Content-Type': 'application/json',
+      // //     },
+      // //     body: JSON.stringify({
+      // //       id: '052d5733-d21f-4a42-8bcd-21261c279e04',
+      // //       token: '3UAXRi5Kfw1Dky3Q1dgBAkRCV6JtNiXM56X8emphtbE',
+      // //     })
           
-        }).then(response => {
-          console.log(response)
-      })
-      }
-      else
-      {
+      // //   }).then(response => {
+      // //     console.log(response)
+      // // })
+      // }
+      // else
+      // {
         
-        fetch('https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            id: 'fcdd9f38-ab8c-407c-814e-1d6ddd132d79',
-            token: '2aSSHXukua8PZG1nO6Z8ZgQkDcZy0tZesoaWP8011A',
-          })
+      //   fetch('https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks', {
+      //     method: 'POST',
+      //     headers: {
+      //       'Accept': 'application/json',
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify({
+      //       id: 'fcdd9f38-ab8c-407c-814e-1d6ddd132d79',
+      //       token: '2aSSHXukua8PZG1nO6Z8ZgQkDcZy0tZesoaWP8011A',
+      //     })
           
-        }).then(response => {
-          console.log(response)
-      })
-      }
+      //   }).then(response => {
+      //     console.log(response)
+      // })
+      // }
          
         
         res.send(results);
