@@ -41,7 +41,7 @@ const connection = MongoClient.connect('mongodb+srv://starmarketing:Crystalball0
 
 
 var i=1
-app.post('/form',async(req, res) => {
+app.post('/post/form',async(req, res) => {
     try {
         // console.log(req.body)
         const data = await addOrUpdateForm({...req.body,id:i+''})
@@ -53,7 +53,7 @@ app.post('/form',async(req, res) => {
     }
 })
 
-app.get('/form',async(req, res) => {
+app.get('/post/form',async(req, res) => {
     try {
         const data = await getForm()
         res.json(data)
@@ -119,10 +119,10 @@ app.get('/post/:id',postSingleGet(connection))
 
 app.post('/post',postInsert(connection))
 
-app.post('/post/*', function(req, res) {
-  // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
-});
+// app.post('/post', function(req, res) {
+//   // Add your code here
+//   res.json({success: 'post call succeed!', url: req.url, body: req.body})
+// });
 
 
 
