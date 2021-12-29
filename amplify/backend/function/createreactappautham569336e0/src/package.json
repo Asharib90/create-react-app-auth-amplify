@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "aws-sdk": "^2.1048.0",
     "aws-serverless-express": "^3.3.5",
     "body-parser": "^1.17.1",
-    "express": "^4.15.2"
+    "cors": "^2.8.5",
+    "express": "^4.15.2",
+    "mongodb": "^4.2.2"
   },
   "devDependencies": {},
   "scripts": {
