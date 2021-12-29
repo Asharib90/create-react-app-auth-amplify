@@ -405,6 +405,11 @@ font-family: 'Poppins',sans-serif;
   padding: 50px 50px;
 }
 
+.featured-image{
+  height:200px;
+  width:300px;
+}
+
 `
 
 const EditorStyles=styled.div`
