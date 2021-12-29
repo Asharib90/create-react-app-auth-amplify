@@ -212,7 +212,7 @@ function PostBlog(){
 
           <br/>
           <label className="labelClass">Tags: </label>
-          <input className="inputClass" type="text" name="tags" onChange={event => setTags(event.target.value)} required></input>
+          <input className="inputClass" type="text" name="tags" onChange={event => setTags(event.target.value)}></input>
           <h2 style={{textAlign:'left'}}>SEO</h2>
           <label className="labelClass">SEO Title: <span className="spanClass">*</span></label>
           <input className="inputClass" type="text" name="seo-title" onChange={event => setSeoTitle(event.target.value)} required></input>
