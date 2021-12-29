@@ -51,7 +51,6 @@ return (
       <MainContainer>
               <div className='Centercontanier'>
                 <div className='viewfrom'>
-                <Navigation/>
                 <h1 className="heading">Summary</h1>
                   <div className='fromsection'>
                     <br /> <br />
@@ -87,7 +86,19 @@ const MianSection = styled.div`
     position: relative;
     z-index: 10;
 }
+.viewfrom h1.heading {
+    padding: 31px 33px 0px;
+}
 
+.fromsection .data-table-extensions {
+    width: 28% !important;
+    float: right;
+    margin-bottom: 19px;
+}
+
+.fromsection .data-table-extensions .data-table-extensions-filter {
+    width: 100%;
+}
 
 `
 

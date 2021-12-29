@@ -52,6 +52,7 @@ function PostBlog(){
       const [title, setTitle] = React.useState('');
       const [slug, setSlug] = React.useState('');
       const [link, setLink] = React.useState('');
+      const [contentTable, setContentTable]=React.useState('');
       const [excerpt, setExcerpt] = React.useState('');
       const [featuredImage, setFeaturedImage] = React.useState("");
       const [featured, setFeatured] = React.useState('');
@@ -96,6 +97,7 @@ function PostBlog(){
                 "title": title,
                 "slug": slug,
                 "link": link,
+                "contentTable":contentTable,
                 "description": convertedContent,
                 "excerpt": excerpt,
                 "featuredImage": "https://starnewsformbbd4e22507e44405a64778be964267bd130756-dev.s3.us-east-2.amazonaws.com/public/"+file.name,
@@ -158,6 +160,10 @@ function PostBlog(){
            <label className="labelClass">Link: </label>
            <input className="inputClass" type="text" name="link" onChange={event => setLink(event.target.value)}/>
            <br/>
+           <label className="labelClass">Table of Contents</label>
+           <textarea className="inputClass" name="content_table" onChange={event => setContentTable(event.target.value)}></textarea>
+        
+           <br/>
            <label>Description: <span className="spanClass">*</span></label>
       
            <EditorStyles>
@@ -206,7 +212,7 @@ function PostBlog(){
 
           <br/>
           <label className="labelClass">Tags: </label>
-          <input className="inputClass" type="text" name="tags" onChange={event => setTags(event.target.value)} required></input>
+          <input className="inputClass" type="text" name="tags" onChange={event => setTags(event.target.value)}></input>
           <h2 style={{textAlign:'left'}}>SEO</h2>
           <label className="labelClass">SEO Title: <span className="spanClass">*</span></label>
           <input className="inputClass" type="text" name="seo-title" onChange={event => setSeoTitle(event.target.value)} required></input>

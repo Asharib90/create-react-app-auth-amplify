@@ -3,7 +3,7 @@ const { response } = require("express");
 const filter = {}
 const  postInsert=(connection)=>(req,res)=>{ 
     getValueForNextSequence(connection,"item_id")
-    const {title,slug,link,description,excerpt,featuredImage,featured,date,category,author,tags, seo}=req.body
+    const {title,slug,link,contentTable,description,excerpt,featuredImage,featured,date,category,author,tags, seo}=req.body
     const newDate = new Date();
     
     
@@ -11,6 +11,7 @@ const  postInsert=(connection)=>(req,res)=>{
     title? filter['title']=title : 0
     slug? filter['slug']=slug : filter['slug']='/'+title.toLowerCase().split(' ').join('-')
     link? filter['link']=null : filter['link']=null
+    contentTable? filter['contentTable']=contentTable :0
     description? filter['description']=description : 0
     excerpt? filter['excerpt']=excerpt : 0
     featuredImage? filter['featuredImage']=featuredImage : 0
