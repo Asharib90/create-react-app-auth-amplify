@@ -95,7 +95,7 @@ function BlogSingle(props){
       
        React.useEffect(function effectFunction() {
          async function fetchPosts() {
-             const response = await fetch(`https://7rvoka7s2m.execute-api.us-east-2.amazonaws.com/dev/amplifysetupe03f0afa-dev/post/${id}`);
+             const response = await fetch(`https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post/${id}`);
              const json = await response.json();
              
              //set data

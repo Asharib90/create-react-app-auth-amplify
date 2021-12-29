@@ -32,7 +32,7 @@ function ViewBlogs() {
         
        //working needs to be done
        
-        const response = await fetch('http://localhost:3001/post', {
+        const response = await fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post', {
             method: 'delete',
             headers: {
                 'Content-Type': 'application/json'

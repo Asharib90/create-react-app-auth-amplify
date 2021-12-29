@@ -85,7 +85,7 @@ function PostBlog(){
           console.log("Error uploading file: ", error);
         }
 
-         fetch('https://7rvoka7s2m.execute-api.us-east-2.amazonaws.com/dev/amplifysetupe03f0afa-dev/post',{
+         fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post',{
            //https://jqci8efgw6.execute-api.us-east-2.amazonaws.com/dev/post
              method:"Post",
              headers: {
