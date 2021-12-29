@@ -120,7 +120,7 @@ function ViewBlogs() {
               <div className='Centercontanier'>
                 <div className='viewfrom'>
                 <Navigation/>
-                {success}
+                {success ? <div id="success"> {success}</div> : ''}
               
                   <h1 className="heading">View News and Blogs</h1>
                   <div className='fromsection'>
@@ -160,8 +160,29 @@ const MianSection = styled.div`
     position: relative;
     z-index: 10;
 }
+.viewfrom h1.heading {
+    padding: 31px 33px 0px;
+}
 
+.fromsection .data-table-extensions {
+    width: 28% !important;
+    float: right;
+    margin-bottom: 19px;
+}
 
+.fromsection .data-table-extensions .data-table-extensions-filter {
+    width: 100%;
+}
+#success {
+    text-align: center;
+    right: 0;
+    top: 0;
+    background: #e1ede0;
+    color: #028b18;
+    padding: 12px 21px;
+    border-radius: 38px;
+    border: 1px solid #028b18;
+}
 `
 
 
