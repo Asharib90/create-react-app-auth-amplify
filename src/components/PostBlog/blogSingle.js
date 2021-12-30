@@ -46,10 +46,28 @@ function BlogSingle(props){
           
    const [image, setImage] = React.useState(null)
 
-   const onImageChange = (event) => {
+   const onImageChange = async (event) => {
     if (event.target.files && event.target.files[0]) {
       setImage(URL.createObjectURL(event.target.files[0]));
+      const file = event.target.files[0];
       setFeaturedImage(event.target.files[0]);
+      try {
+        await Storage.put(file.name, file, {
+        //contentType: "image/png", // contentType is optional
+        resumable: true,
+        completeCallback: (event) => {
+            console.log(`Successfully uploaded ${event.key}`);
+        },
+        progressCallback: (progress) => {
+            console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+        },
+        errorCallback: (err) => {
+            console.error('Unexpected error while uploading', err);
+        }
+      });
+       } catch (error) {
+      console.log("Error uploading file: ", error);
+    }
     }
    }
    
@@ -140,6 +158,30 @@ function BlogSingle(props){
        }, []);
     
       
+
+       const uploadImage = async(e) => {
+        const file = e.target.files[0];
+        setFeaturedImage(e.target.files[0])
+     
+      try {
+            await Storage.put(file.name, file, {
+            //contentType: "image/png", // contentType is optional
+            resumable: true,
+            completeCallback: (event) => {
+                console.log(`Successfully uploaded ${event.key}`);
+            },
+            progressCallback: (progress) => {
+                console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+            },
+            errorCallback: (err) => {
+                console.error('Unexpected error while uploading', err);
+            }
+          });
+           } catch (error) {
+          console.log("Error uploading file: ", error);
+        }
+      }
+
       
        const submitHandler = e => {
         e.preventDefault();
@@ -156,6 +198,7 @@ function BlogSingle(props){
          const file = featuredImage;
         
         try {
+         
              Storage.put(file.name, file, {
             //contentType: "image/png", // contentType is optional
             

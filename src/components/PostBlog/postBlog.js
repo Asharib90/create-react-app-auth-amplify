@@ -66,7 +66,31 @@ function PostBlog(){
       const [seoDescription, setSeoDescription] = React.useState('');
       const [seoKeywords, setSeoKeywords] = React.useState('');     
 
-      const submitHandler = e => {
+
+      const uploadImage = async(e) => {
+        const file = e.target.files[0];
+        setFeaturedImage(e.target.files[0])
+     
+      try {
+            await Storage.put(file.name, file, {
+            //contentType: "image/png", // contentType is optional
+            resumable: true,
+            completeCallback: (event) => {
+                console.log(`Successfully uploaded ${event.key}`);
+            },
+            progressCallback: (progress) => {
+                console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+            },
+            errorCallback: (err) => {
+                console.error('Unexpected error while uploading', err);
+            }
+          });
+           } catch (error) {
+          console.log("Error uploading file: ", error);
+        }
+      }
+
+      const submitHandler = async e => {
         e.preventDefault();
    
         if(editorState.getCurrentContent().hasText()==false)
@@ -74,17 +98,9 @@ function PostBlog(){
           setSuccess('Description is required');
           return false;
         }
-         const file = featuredImage;
-     
-        try {
-             Storage.put(file.name, file, {
-            //contentType: "image/png", // contentType is optional
-            
-          });
-          console.log('Success');
-        } catch (error) {
-          console.log("Error uploading file: ", error);
-        }
+       
+          //console.log('Success');
+          const file = featuredImage;
 
          fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post',{
           
@@ -188,7 +204,7 @@ function PostBlog(){
            <input className="inputClass" type="text" name="excerpt" onChange={event => setExcerpt(event.target.value)} required/>
            <br/>
            <label className="labelClass">Featured Image: <span className="spanClass">*</span></label>
-           <input className="inputClass" type="file" name='featuredImage' accept="image/png, image/jpeg" onChange={event => setFeaturedImage(event.target.files[0])} required></input>
+           <input className="inputClass" type="file" name='featuredImage' accept="image/png, image/jpeg" onChange={event => uploadImage(event)} required></input>
          
            <br/>
            <label className="labelClass">Featured: <span className="spanClass">*</span></label>
