@@ -1,6 +1,6 @@
 const postUpdate=(connection)=>(req,res)=>{ 
   
-  const {id,title,slug,link,contentTable,description,excerpt,featuredImage,oldFeaturedImage,featured,date,category,author,tags, seo}=req.body
+  const {id,title,slug,link,contentTable,description,excerpt,featuredImage,oldFeaturedImage,featured,date,category,author,tags, follow, seo}=req.body
   const newDate = new Date();
    
     const filter = {}
@@ -17,7 +17,7 @@ const postUpdate=(connection)=>(req,res)=>{
     category? filter['category']=category : 0
     author? filter['author']=author : 0
     tags? filter['tags']=tags : filter['tags']=tags
-    
+    follow? filter['follow']=follow : 0
      
     seo?filter['seo']=seo:0
    

@@ -9,7 +9,7 @@ import backgroundImage from '../../assets/WebBg.png';
 import draftToHtml from 'draftjs-to-html';
 import Amplify,{Storage} from 'aws-amplify';
 import Navigation from "../Navigation/navigation";
-
+import {Link} from 'react-router-dom'
 function PostBlog(){
   function uploadImageCallBack(file){
     return new Promise(
@@ -59,7 +59,7 @@ function PostBlog(){
       const [category, setCategory] = React.useState('');
       const [author, setAuthor] = React.useState('');
       const [tags, setTags] = React.useState('');
-
+      const [follow,setFollow] = React.useState('');
       //SEO fields
        
       const [seoTitle, setSeoTitle] = React.useState('');
@@ -87,7 +87,7 @@ function PostBlog(){
         }
 
          fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post',{
-           //https://jqci8efgw6.execute-api.us-east-2.amazonaws.com/dev/post
+          
              method:"Post",
              headers: {
                 'Content-Type': 'application/json'
@@ -105,6 +105,7 @@ function PostBlog(){
                 "category": category,
                 "author": author,
                 "tags": tags,
+                "follow":follow,
                 "seo": {
                   "title": seoTitle,
                   "description": seoDescription,
@@ -123,7 +124,7 @@ function PostBlog(){
               })
         
        }
-
+      
 
     return (
       <MianSection>
@@ -138,8 +139,8 @@ function PostBlog(){
       <Header style={{backgroundImage: `linear-gradient(359deg, #ffffff17 50%, rgb(255 255 255 / 43%) 100%, #ffffffe3 0px),url(${backgroundImage})`}}>
                 <div className='Centercontanier'>
                     <div className='headersection'>
-                        <div className='logo'><img src={newsLogo} alt="logo" className="News"></img></div>
-                        <div className='logo'><img src={blogsLogo} alt="logo" className="Blogs"></img></div>
+                       <Link to="/"> <div className='logo'><img src={newsLogo} alt="logo" className="News"></img></div></Link>
+                       <Link to="/">  <div className='logo'><img src={blogsLogo} alt="logo" className="Blogs"></img></div></Link>
                     </div>
                 </div>
             </Header>
@@ -188,6 +189,7 @@ function PostBlog(){
            <br/>
            <label className="labelClass">Featured Image: <span className="spanClass">*</span></label>
            <input className="inputClass" type="file" name='featuredImage' accept="image/png, image/jpeg" onChange={event => setFeaturedImage(event.target.files[0])} required></input>
+         
            <br/>
            <label className="labelClass">Featured: <span className="spanClass">*</span></label>
           <select className="inputClass" name="featured" onChange={event => setFeatured(event.target.value)}>
@@ -213,6 +215,14 @@ function PostBlog(){
           <br/>
           <label className="labelClass">Tags: </label>
           <input className="inputClass" type="text" name="tags" onChange={event => setTags(event.target.value)}></input>
+          <br/>
+          <label className="labelClass">Follow: <span className="spanClass">*</span> </label>
+          <select className="inputClass" onChange={event => setFollow(event.target.value)} required>
+          <option value="">-Select One-</option>
+           <option value="Yes">Yes</option>
+           <option value="No">No</option>
+          </select>
+        
           <h2 style={{textAlign:'left'}}>SEO</h2>
           <label className="labelClass">SEO Title: <span className="spanClass">*</span></label>
           <input className="inputClass" type="text" name="seo-title" onChange={event => setSeoTitle(event.target.value)} required></input>

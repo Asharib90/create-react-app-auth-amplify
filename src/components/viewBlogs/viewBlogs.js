@@ -11,6 +11,7 @@ import Navigation from "../Navigation/navigation";
 import awsconfig from '../../aws-exports';
 import Amplify, { API } from 'aws-amplify';
 
+
 Amplify.configure(awsconfig);
 
 function ViewBlogs() {
@@ -109,8 +110,8 @@ function ViewBlogs() {
             <Header style={{backgroundImage: `linear-gradient(359deg, #ffffff17 50%, rgb(255 255 255 / 43%) 100%, #ffffffe3 0px),url(${backgroundImage})`}}>
                 <div className='Centercontanier'>
                     <div className='headersection'>
-                        <div className='logo'><img src={newsLogo} alt="logo" className="News"></img></div>
-                        <div className='logo'><img src={blogsLogo} alt="logo" className="Blogs"></img></div>
+                    <Link to="/"> <div className='logo'><img src={newsLogo} alt="logo" className="News"></img></div></Link>
+                       <Link to="/">  <div className='logo'><img src={blogsLogo} alt="logo" className="Blogs"></img></div></Link>
                     </div>
                 </div>
             </Header>

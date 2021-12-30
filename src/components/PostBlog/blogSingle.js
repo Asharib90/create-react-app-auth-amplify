@@ -10,7 +10,7 @@ import draftToHtml from 'draftjs-to-html';
 import Amplify,{Storage} from 'aws-amplify';
 import { useParams } from 'react-router';
 import Navigation from "../Navigation/navigation";
-
+import {Link} from 'react-router-dom';
 
 
 
@@ -18,7 +18,7 @@ function BlogSingle(props){
   let { id } = useParams();
   
  
-
+//upload images inside editor
   function uploadImageCallBack(file){
     return new Promise(
       (resolve,reject)=>{
@@ -41,6 +41,17 @@ function BlogSingle(props){
     )
   }
 
+
+   //display selected image
+          
+   const [image, setImage] = React.useState(null)
+
+   const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setImage(URL.createObjectURL(event.target.files[0]));
+      setFeaturedImage(event.target.files[0]);
+    }
+   }
    
 
 
@@ -60,7 +71,7 @@ function BlogSingle(props){
       const [category, setCategory] = React.useState('');
       const [author, setAuthor] = React.useState('');
       const [tags, setTags] = React.useState('');
-
+      const [follow,setFollow] = React.useState('');
       //SEO fields
        
       const [seoTitle, setSeoTitle] = React.useState('');
@@ -107,9 +118,11 @@ function BlogSingle(props){
              setExcerpt(json.excerpt)
              setFeatured(json.featured)
              setOldFeaturedImage(json.featuredImage)
+             setImage(json.featuredImage)
              setCategory(json.category)
              setAuthor(json.author)
              setTags(json.tags)
+             setFollow(json.follow)
              setSeoTitle(json.seo.title)
              setSeoDescription(json.seo.description)
              setSeoKeywords(json.seo.keywords)
@@ -162,6 +175,7 @@ function BlogSingle(props){
             FeaturedImage="https://createreactappautham774c4af455b14a6da80642ef720133830-devi.s3.us-east-2.amazonaws.com/public/"+file.name
           }
          fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post',{
+           
              method:"PUT",
              headers: {
                 'Content-Type': 'application/json'
@@ -182,6 +196,7 @@ function BlogSingle(props){
                 "category": category,
                 "author": author,
                 "tags": tags,
+                "follow":follow,
                 "seo": {
                   "title": seoTitle,
                   "description": seoDescription,
@@ -213,8 +228,6 @@ function BlogSingle(props){
       // );
 
      
-          
-  
         
      
 
@@ -233,8 +246,8 @@ function BlogSingle(props){
       <Header style={{backgroundImage: `linear-gradient(359deg, #ffffff17 50%, rgb(255 255 255 / 43%) 100%, #ffffffe3 0px),url(${backgroundImage})`}}>
                 <div className='Centercontanier'>
                     <div className='headersection'>
-                        <div className='logo'><img src={newsLogo} alt="logo" className="News"></img></div>
-                        <div className='logo'><img src={blogsLogo} alt="logo" className="Blogs"></img></div>
+                    <Link to="/"> <div className='logo'><img src={newsLogo} alt="logo" className="News"></img></div></Link>
+                       <Link to="/">  <div className='logo'><img src={blogsLogo} alt="logo" className="Blogs"></img></div></Link>
                     </div>
                 </div>
             </Header>
@@ -284,9 +297,12 @@ function BlogSingle(props){
            <br/>  <br/>
            <label className="labelClass">Featured Image: <span className="spanClass">*</span></label>
          <br/>
-           <img className="featured-image" src={posts.featuredImage} alt="Featured-Image"></img>
-  
-           <input className="inputClass" type="file" name='featuredImage' accept="image/png, image/jpeg" onChange={event => setFeaturedImage(event.target.files[0])}></input>
+           {/* <img className="featured-image" src={posts.featuredImage} alt="Featured-Image"></img> */}
+         
+           <img src={image} alt="Featured-Image" className="featured-image"/>
+           <input type="file" onChange={onImageChange} className="inputClass" accept="image/png, image/jpeg" />
+           {/* <input className="inputClass" type="file" name='featuredImage' accept="image/png, image/jpeg" onChange={event => setFeaturedImage(event.target.files[0])}></input> */}
+           
            <br/>
            <label className="labelClass">Featured: <span className="spanClass">*</span></label>
           <select className="inputClass" name="featured" onChange={event => setFeatured(event.target.value)}>
@@ -314,6 +330,14 @@ function BlogSingle(props){
           <br/>
           <label className="labelClass">Tags: </label>
           <input className="inputClass" type="text" value={tags} name="tags" onChange={event => setTags(event.target.value)} required></input>
+          <br/>
+          <label className="labelClass">Follow: <span className="spanClass">*</span> </label>
+          <select className="inputClass" onChange={event => setFollow(event.target.value)} required>
+          {follow == 'Yes'?  <option value={follow}>Yes</option>: <option value={follow}>No</option> }
+           <option value="Yes">Yes</option>
+           <option value="No">No</option>
+          </select>
+         
           <h2 style={{textAlign:'left'}}>SEO</h2>
           <label className="labelClass">SEO Title: <span className="spanClass">*</span></label>
           <input className="inputClass" type="text" value={seoTitle} name="seo-title" onChange={event => setSeoTitle(event.target.value)} required></input>
