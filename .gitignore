@@ -41,6 +41,8 @@ amplify/backend/.temp
 build/
 dist/
 node_modules/
+amplify_ful/
+old_amplify/
 aws-exports.js
 awsconfiguration.json
 amplifyconfiguration.json
