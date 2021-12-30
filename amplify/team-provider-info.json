@@ -17,6 +17,9 @@
           "deploymentBucketName": "amplify-authcra-devi-133830-deployment",
           "s3Key": "amplify-builds/createreactappautham569336e0-303955734c465a344f30-build.zip"
         }
+      },
+      "auth": {
+        "createreactappauthamplify": {}
       }
     }
   }

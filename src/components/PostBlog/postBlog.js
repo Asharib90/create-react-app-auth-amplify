@@ -10,6 +10,13 @@ import draftToHtml from 'draftjs-to-html';
 import Amplify,{Storage} from 'aws-amplify';
 import Navigation from "../Navigation/navigation";
 import {Link} from 'react-router-dom'
+
+
+import awsconfig from '../../aws-exports';
+Amplify.configure(awsconfig);
+
+
+
 function PostBlog(){
   function uploadImageCallBack(file){
     return new Promise(

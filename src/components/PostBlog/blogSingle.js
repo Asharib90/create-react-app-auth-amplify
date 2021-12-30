@@ -12,6 +12,10 @@ import { useParams } from 'react-router';
 import Navigation from "../Navigation/navigation";
 import {Link} from 'react-router-dom';
 
+import awsconfig from '../../aws-exports';
+
+
+Amplify.configure(awsconfig);
 
 
 function BlogSingle(props){
