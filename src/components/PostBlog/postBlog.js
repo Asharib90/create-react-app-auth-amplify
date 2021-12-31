@@ -41,6 +41,9 @@ function PostBlog(){
   }
 
 
+  
+
+
     const [editorState, setEditorState] = React.useState(
         () => EditorState.createEmpty(),
       );      
@@ -53,6 +56,24 @@ function PostBlog(){
         let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
         setConvertedContent(currentContentAsHTML);
       }
+
+
+      
+      //calculate time to read
+      const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
+      const value = blocks.map(block => (!block.text.trim() && '\n') || block.text).join('\n');
+      
+      const [time, setTime] = React.useState(0);
+      React.useEffect(() => {
+      const text = value;
+      const wpm = 200;
+      const words = text.trim().split(/\s+/).length;
+      const time = Math.ceil(words / wpm);
+      setTime(time)
+    
+  });
+
+
       //Submit Form
       const [success,setSuccess] = React.useState('');
       //get input field value
@@ -110,7 +131,7 @@ function PostBlog(){
           const file = featuredImage;
 
          fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post',{
-          
+         
              method:"Post",
              headers: {
                 'Content-Type': 'application/json'
@@ -129,6 +150,7 @@ function PostBlog(){
                 "author": author,
                 "tags": tags,
                 "follow":follow,
+                "timeToRead":time,
                 "seo": {
                   "title": seoTitle,
                   "description": seoDescription,

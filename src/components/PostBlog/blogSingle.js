@@ -76,6 +76,10 @@ function BlogSingle(props){
    }
    
 
+  
+
+
+
 
       //Submit Form
       const [success,setSuccess] = React.useState('');
@@ -123,7 +127,25 @@ function BlogSingle(props){
         let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
         setConvertedContent(currentContentAsHTML);
       }
-          
+      
+      
+
+        //calculate time to read
+    const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
+    const value = blocks.map(block => (!block.text.trim() && '\n') || block.text).join('\n');
+    
+    const [time, setTime] = React.useState(0);
+    React.useEffect(() => {
+    const text = value;
+    const wpm = 200;
+    const words = text.trim().split(/\s+/).length;
+    const time = Math.ceil(words / wpm);
+    setTime(time)
+    
+});
+
+
+
 
        const [posts, updatePosts] = React.useState([]);
       
@@ -163,29 +185,7 @@ function BlogSingle(props){
     
       
 
-       const uploadImage = async(e) => {
-        const file = e.target.files[0];
-        setFeaturedImage(e.target.files[0])
-     
-      try {
-            await Storage.put(file.name, file, {
-            //contentType: "image/png", // contentType is optional
-            resumable: true,
-            completeCallback: (event) => {
-                console.log(`Successfully uploaded ${event.key}`);
-            },
-            progressCallback: (progress) => {
-                console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
-            },
-            errorCallback: (err) => {
-                console.error('Unexpected error while uploading', err);
-            }
-          });
-           } catch (error) {
-          console.log("Error uploading file: ", error);
-        }
-      }
-
+       
       
        const submitHandler = e => {
         e.preventDefault();
@@ -244,6 +244,7 @@ function BlogSingle(props){
                 "author": author,
                 "tags": tags,
                 "follow":follow,
+                "timeToRead":time,
                 "seo": {
                   "title": seoTitle,
                   "description": seoDescription,
