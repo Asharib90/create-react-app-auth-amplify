@@ -1,7 +1,9 @@
 const { response } = require("express");
-
+const axios = require('axios');
 const filter = {}
 const  postInsert=(connection)=>(req,res)=>{ 
+
+  
     getValueForNextSequence(connection,"item_id")
     const {title,slug,link,contentTable,description,excerpt,featuredImage,featured,date,category,author,tags,follow,timeToRead, seo}=req.body
     const newDate = new Date();
@@ -35,42 +37,32 @@ const  postInsert=(connection)=>(req,res)=>{
    
     .then(results => {
     try {
-      // if(req.body.category==1)
-      // {
-        
-      // //   fetch('https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks', {
-      // //     method: 'POST',
-      // //     headers: {
-      // //       'Accept': 'application/json',
-      // //       'Content-Type': 'application/json',
-      // //     },
-      // //     body: JSON.stringify({
-      // //       id: '052d5733-d21f-4a42-8bcd-21261c279e04',
-      // //       token: '3UAXRi5Kfw1Dky3Q1dgBAkRCV6JtNiXM56X8emphtbE',
-      // //     })
-          
-      // //   }).then(response => {
-      // //     console.log(response)
-      // // })
-      // }
-      // else
-      // {
-        
-      //   fetch('https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks', {
-      //     method: 'POST',
-      //     headers: {
-      //       'Accept': 'application/json',
-      //       'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify({
-      //       id: 'fcdd9f38-ab8c-407c-814e-1d6ddd132d79',
-      //       token: '2aSSHXukua8PZG1nO6Z8ZgQkDcZy0tZesoaWP8011A',
-      //     })
-          
-      //   }).then(response => {
-      //     console.log(response)
-      // })
-      // }
+      if(req.body.category==1)
+      {
+        axios.post('https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks?id=b8bb08f8-ed88-4b0b-aea7-91d73e7c6fb7&token=vGBI8XcK5Z8MGLu8TPb8017laqqzYKp0A35ELgkdFc', {
+    body: []
+  }, { params: {
+    id: 'b8bb08f8-ed88-4b0b-aea7-91d73e7c6fb7', 
+    token: 'vGBI8XcK5Z8MGLu8TPb8017laqqzYKp0A35ELgkdFc'   
+  }}) 
+  .then(function (response) { 
+    console.log(response); 
+  }) 
+     
+      }
+    else
+      {
+        axios.post('https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks?id=fcdd9f38-ab8c-407c-814e-1d6ddd132d79&token=2aSSHXukua8PZG1nO6Z8ZgQkDcZy0tZesoaWP8011A', {
+       body: []
+  }, { params: {
+    id: 'fcdd9f38-ab8c-407c-814e-1d6ddd132d79', 
+    token: '2aSSHXukua8PZG1nO6Z8ZgQkDcZy0tZesoaWP8011A'   
+  }}) 
+  .then(function (response) { 
+    console.log(response); 
+  }) 
+    
+      }
          
         
         res.send(results);
