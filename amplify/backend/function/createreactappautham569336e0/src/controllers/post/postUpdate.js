@@ -8,7 +8,7 @@ const postUpdate=(connection)=>(req,res)=>{
     title? filter['title']=title : 0
     slug? filter['slug']=slug : filter['slug']='/'+title.toLowerCase().split(' ').join('-')
     link? filter['link']=null : filter['link']=null
-    contentTable? filter['contentTable']=contentTable :0
+    contentTable? filter['contentTable']=contentTable :filter['contentTable']=contentTable
     description? filter['description']=description : 0
     excerpt? filter['excerpt']=excerpt : 0
     featuredImage? filter['featuredImage']=featuredImage : 0

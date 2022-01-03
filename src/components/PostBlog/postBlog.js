@@ -131,6 +131,7 @@ function PostBlog(){
           const file = featuredImage;
 
          fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post',{
+          
              method:"Post",
              headers: {
                 'Content-Type': 'application/json'
@@ -169,6 +170,9 @@ function PostBlog(){
         
        }
       
+    
+       
+
 
     return (
       <MianSection>
@@ -259,6 +263,7 @@ function PostBlog(){
           <br/>
           <label className="labelClass">Tags: </label>
           <input className="inputClass" type="text" name="tags" onChange={event => setTags(event.target.value)}></input>
+        
           <br/>
           <label className="labelClass">Follow: <span className="spanClass">*</span> </label>
           <select className="inputClass" onChange={event => setFollow(event.target.value)} required>

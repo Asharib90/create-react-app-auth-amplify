@@ -118,10 +118,7 @@ function BlogSingle(props){
       const  [convertedContent, setConvertedContent] = React.useState(null);
       const handleEditorChange = (state) => {
         setEditorState(state);
-        convertContentToHTML();
-   
-       
-        
+        convertContentToHTML();    
       }
       const convertContentToHTML = () => {
         let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
@@ -222,7 +219,7 @@ function BlogSingle(props){
             FeaturedImage="https://createreactappautham774c4af455b14a6da80642ef720133830-devi.s3.us-east-2.amazonaws.com/public/"+file.name
           }
          fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post',{
-           
+          
              method:"PUT",
              headers: {
                 'Content-Type': 'application/json'

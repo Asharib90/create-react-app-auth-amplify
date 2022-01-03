@@ -1,8 +1,21 @@
 const { response } = require("express");
 const axios = require('axios');
+const request = require('request');
+
 const filter = {}
 const  postInsert=(connection)=>(req,res)=>{ 
 
+  // var options = {
+  //   url: 'https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks?id=b8bb08f8-ed88-4b0b-aea7-91d73e7c6fb7&token=vGBI8XcK5Z8MGLu8TPb8017laqqzYKp0A35ELgkdFc',
+  //   'method': 'POST',
+  //    'body': [] 
+    
+  //   };
+    
+  //    request(options,function(error,response,body){
+  //      console.log(response)
+  //   });
+   
   
     getValueForNextSequence(connection,"item_id")
     const {title,slug,link,contentTable,description,excerpt,featuredImage,featured,date,category,author,tags,follow,timeToRead, seo}=req.body
