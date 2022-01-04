@@ -406,7 +406,7 @@ const handleTagChange = (val) => {
            
            <br/>
            <label className="labelClass">Featured: <span className="spanClass">*</span></label>
-          <select className="inputClass" name="featured" onChange={event => setFeatured(event.target.value)}>
+          <select className="inputClass" value={featured} name="featured" onChange={event => setFeatured(event.target.value)}>
           {featured == 'true'?  <option value={featured}>Yes</option>: <option value={featured}>No</option> }
            <option value="true">Yes</option>
            <option value="false">No</option>
@@ -430,7 +430,7 @@ const handleTagChange = (val) => {
 
           <br/>
           <label className="labelClass">Tags: </label>
-          <input className="inputClass" type="text" value={tags} name="tags" onChange={event => setTags(event.target.value)} required></input>
+          {/* <input className="inputClass" type="text" value={tags} name="tags" onChange={event => setTags(event.target.value)} required></input> */}
           <ReactTags
       tags={tags}
       suggestions={suggestions}
