@@ -11,6 +11,8 @@ import Amplify,{Storage} from 'aws-amplify';
 import { useParams } from 'react-router';
 import Navigation from "../Navigation/navigation";
 import {Link} from 'react-router-dom';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 import awsconfig from '../../aws-exports';
 
@@ -167,6 +169,7 @@ function BlogSingle(props){
              setSeoTitle(json.seo.title)
              setSeoDescription(json.seo.description)
              setSeoKeywords(json.seo.keywords)
+             setConvertedContent(json.description)
              setEditorState(EditorState.createWithContent(
                   ContentState.createFromBlockArray(
                     convertFromHTML(json.description)
@@ -261,18 +264,7 @@ function BlogSingle(props){
        }
        
        
-       
-       //Editor 
       
-      //  const [editorState, setEditorState] = React.useState(
-      //   () => EditorState.createWithContent(
-      //     ContentState.createFromBlockArray(
-      //       convertFromHTML('<p>Initial content</p>')
-      //     ),
-      //   )
-      // );
-
-     
         
      
 
@@ -315,12 +307,19 @@ function BlogSingle(props){
            <input className="inputClass" type="text" name="link" value={link} onChange={event => setLink(event.target.value)}/>
            <br/>
            <label className="labelClass">Table of Contents</label>
-           <textarea className="inputClass" name="content_table" onChange={event => setContentTable(event.target.value)} value={contentTable}></textarea>
+           <textarea className="inputTextAreaClass" name="content_table" onChange={event => setContentTable(event.target.value)} value={contentTable}></textarea>
         
            <br/>
            <label>Description: <span className="spanClass">*</span></label>
-      
-           <EditorStyles>
+           <Tabs>
+             <br/>
+    <TabList>
+      <Tab>Visual</Tab>
+      <Tab>Html</Tab>
+    </TabList>
+
+    <TabPanel>
+    <EditorStyles>
       <Editor
         editorState={editorState}
         onEditorStateChange={handleEditorChange}
@@ -336,6 +335,15 @@ function BlogSingle(props){
        
       />
      </EditorStyles>
+    </TabPanel>
+    <TabPanel>
+    <textarea className="inputTextAreaClass" onChange={event => setConvertedContent(event.target.value)} value={convertedContent}></textarea>
+    </TabPanel>
+  </Tabs>
+         
+    
+   
+
            <br/>
            <label className="labelClass">Excerpt: <span className="spanClass">*</span></label>
            <input className="inputClass" type="text" name="excerpt" value={excerpt} onChange={event => setExcerpt(event.target.value)} required/>
@@ -456,6 +464,17 @@ font-family: 'Poppins',sans-serif;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+.inputTextAreaClass{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 200px;
 }
 
 .inputSubmitClass{

@@ -10,7 +10,8 @@ import draftToHtml from 'draftjs-to-html';
 import Amplify,{Storage} from 'aws-amplify';
 import Navigation from "../Navigation/navigation";
 import {Link} from 'react-router-dom'
-
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 import awsconfig from '../../aws-exports';
 Amplify.configure(awsconfig);
@@ -56,8 +57,9 @@ function PostBlog(){
         let currentContentAsHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
         setConvertedContent(currentContentAsHTML);
       }
+      
 
-
+    
       
       //calculate time to read
       const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
@@ -210,12 +212,21 @@ function PostBlog(){
            <input className="inputClass" type="text" name="link" onChange={event => setLink(event.target.value)}/>
            <br/>
            <label className="labelClass">Table of Contents</label>
-           <textarea className="inputClass" name="content_table" onChange={event => setContentTable(event.target.value)}></textarea>
+           <textarea className="inputTextAreaClass" name="content_table" onChange={event => setContentTable(event.target.value)}></textarea>
         
            <br/>
+           
            <label>Description: <span className="spanClass">*</span></label>
-      
-           <EditorStyles>
+         
+           <Tabs>
+           <br/>
+    <TabList>
+      <Tab>Visual</Tab>
+      <Tab>Html</Tab>
+    </TabList>
+
+    <TabPanel>
+    <EditorStyles>
       <Editor
         editorState={editorState}
         onEditorStateChange={handleEditorChange}
@@ -231,6 +242,16 @@ function PostBlog(){
        
       />
      </EditorStyles>
+    </TabPanel>
+    <TabPanel>
+    <textarea className="inputTextAreaClass" onChange={event => setConvertedContent(event.target.value)} value={convertedContent}></textarea>
+    </TabPanel>
+  </Tabs>
+         
+    
+  
+    
+     
            <br/>
            <label className="labelClass">Excerpt: <span className="spanClass">*</span></label>
            <input className="inputClass" type="text" name="excerpt" onChange={event => setExcerpt(event.target.value)} required/>
@@ -345,6 +366,19 @@ font-family: 'Poppins',sans-serif;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+
+   
+}
+
+.inputTextAreaClass{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 200px;
 }
 
 .inputSubmitClass{
