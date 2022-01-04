@@ -406,26 +406,26 @@ const handleTagChange = (val) => {
            
            <br/>
            <label className="labelClass">Featured: <span className="spanClass">*</span></label>
-          <select className="inputClass" value={featured} name="featured" onChange={event => setFeatured(event.target.value)}>
-          {featured == 'true'?  <option value={featured}>Yes</option>: <option value={featured}>No</option> }
-           <option value="true">Yes</option>
-           <option value="false">No</option>
+          <select className="inputClass" name="featured" onChange={event => setFeatured(event.target.value)}>
+         
+           {featured=='true'?<option value="true"selected>Yes</option>:<option value="true">Yes</option>}
+           {featured=='false'?<option value="false"selected>No</option>:<option value="false">No</option>}
           </select>
           <br/>
           <label className="labelClass">Category: <span className="spanClass">*</span></label>
           <select className="inputClass" name="category" onChange={event => setCategory(event.target.value)} required>
-          {category == '1'? <option value={category}>Star Blogs</option>: 
-         <option value={category}>Star News</option> }
-           <option value="1">Star Blogs</option>
-           <option value="2">Star News</option>
+        
+           {category=='1'?<option value="1" selected>Star Blogs</option>:<option value="1">Star Blogs</option>}
+           {category=='2'?<option value="2" selected>Star News</option>:<option value="2">Star News</option>}
           </select>
         
           <br/>
           <label className="labelClass">Author: <span className="spanClass">*</span></label>
           <select className="inputClass" name="author" onChange={event => setAuthor(event.target.value)} required>
-            {author == '1'?  <option value={author}>Arif Mustafa</option>: <option value={author}>Aamir Saeeduddin</option> }
-           <option value="1">Arif Mustafa</option>
-           <option value="2">Aamir Saeeduddin</option>
+           
+         {author=='1'? <option value="1" selected>Arif Mustafa</option>:<option value="1">Arif Mustafa</option>}
+         {author=='2'? <option value="2" selected>Aamir Saeeduddin</option>:<option value="2">Aamir Saeeduddin</option>}
+         
           </select>
 
           <br/>
