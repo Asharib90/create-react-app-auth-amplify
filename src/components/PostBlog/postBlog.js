@@ -12,8 +12,13 @@ import Navigation from "../Navigation/navigation";
 import {Link} from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import ReactTags from 'react-autocomplete-tag' // load ReactTags component
+import 'react-autocomplete-tag/dist/index.css' // load default style
 
 import awsconfig from '../../aws-exports';
+
+
+
 Amplify.configure(awsconfig);
 
 
@@ -41,7 +46,7 @@ function PostBlog(){
     )
   }
 
-
+  
   
 
 
@@ -88,7 +93,9 @@ function PostBlog(){
       const [featured, setFeatured] = React.useState('');
       const [category, setCategory] = React.useState('');
       const [author, setAuthor] = React.useState('');
-      const [tags, setTags] = React.useState('');
+      const [tags, setTags] = React.useState([]);
+      const [suggestions, setSuggestions] = React.useState([])
+      const[tagListFinal, setTagList] = React.useState([])
       const [follow,setFollow] = React.useState('');
       //SEO fields
        
@@ -119,6 +126,51 @@ function PostBlog(){
           console.log("Error uploading file: ", error);
         }
       }
+
+
+     
+
+  //fetch tags for suggestions
+    
+  React.useEffect(function effectFunction() {
+    async function fetchSuggestions() {
+        const response = await fetch('https://newsserverapi.herokuapp.com/tags');
+        const json = await response.json();
+        setTagList(json);
+       
+        
+    }
+    fetchSuggestions();
+}, []);
+
+const tagList=tagListFinal.map(d=>
+  d.name
+)
+ const addTag = (val) => {
+  setTags([...tags, val])
+  setSuggestions([])
+}
+const removeTag = (idx) => {
+  var t = [...tags]
+  t.splice(idx, 1)
+  setTags(t)
+}
+
+const handleTagChange = (val) => {
+  // in real app, suggestions could be fetched from backend
+  if (val.length > 0) {
+    var new_sug = []
+    tagList.forEach((t) => {
+      if (t.includes(val)) {
+        new_sug.push(t)
+      }
+    })
+    setSuggestions(new_sug)
+  } else {
+    setSuggestions([])
+  }
+}
+
 
       const submitHandler = async e => {
         e.preventDefault();
@@ -168,6 +220,7 @@ function PostBlog(){
                 // setLoader(false)
                 setSuccess('Your Blog has been successfully posted.');
                 setEditorState(EditorState.createEmpty());
+                setTags([]);
               })
         
        }
@@ -180,11 +233,7 @@ function PostBlog(){
       <MianSection>
       <div className='maincontanier'>
            
-          
-  
-         
-          
-      
+    
           
       <Header style={{backgroundImage: `linear-gradient(359deg, #ffffff17 50%, rgb(255 255 255 / 43%) 100%, #ffffffe3 0px),url(${backgroundImage})`}}>
                 <div className='Centercontanier'>
@@ -283,8 +332,14 @@ function PostBlog(){
 
           <br/>
           <label className="labelClass">Tags: </label>
-          <input className="inputClass" type="text" name="tags" onChange={event => setTags(event.target.value)}></input>
-        
+          {/* <input className="inputClass" type="text" name="tags" onChange={event => setTags(event.target.value)}></input> */}
+          <ReactTags
+      tags={tags}
+      suggestions={suggestions}
+      onAddHandler={(val) => addTag(val)}
+      onDeleteHandler={(idx) => removeTag(idx)}
+      onChangeHandler={(val) => handleTagChange(val)}
+    />
           <br/>
           <label className="labelClass">Follow: <span className="spanClass">*</span> </label>
           <select className="inputClass" onChange={event => setFollow(event.target.value)} required>

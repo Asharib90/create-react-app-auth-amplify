@@ -13,6 +13,9 @@ import Navigation from "../Navigation/navigation";
 import {Link} from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import ReactTags from 'react-autocomplete-tag' // load ReactTags component
+import 'react-autocomplete-tag/dist/index.css' // load default style
+
 
 import awsconfig from '../../aws-exports';
 
@@ -98,7 +101,9 @@ function BlogSingle(props){
       const [featured, setFeatured] = React.useState('');
       const [category, setCategory] = React.useState('');
       const [author, setAuthor] = React.useState('');
-      const [tags, setTags] = React.useState('');
+      const [tags, setTags] = React.useState([]);
+      const [suggestions, setSuggestions] = React.useState([])
+      const[tagListFinal, setTagList] = React.useState([])
       const [follow,setFollow] = React.useState('');
       //SEO fields
        
@@ -164,7 +169,7 @@ function BlogSingle(props){
              setImage(json.featuredImage)
              setCategory(json.category)
              setAuthor(json.author)
-             setTags(json.tags)
+             setTags(json.tags.split(","))
              setFollow(json.follow)
              setSeoTitle(json.seo.title)
              setSeoDescription(json.seo.description)
@@ -184,6 +189,49 @@ function BlogSingle(props){
        }, []);
     
       
+
+       //fetch tags for suggestions
+    
+  React.useEffect(function effectFunction() {
+    async function fetchSuggestions() {
+        const response = await fetch('https://newsserverapi.herokuapp.com/tags');
+        const json = await response.json();
+        setTagList(json);
+       
+        
+    }
+    fetchSuggestions();
+}, []);
+
+const tagList=tagListFinal.map(d=>
+  d.name
+)
+
+ const addTag = (val) => {
+  setTags([...tags, val])
+  setSuggestions([])
+}
+const removeTag = (idx) => {
+  var t = [...tags]
+  t.splice(idx, 1)
+  setTags(t)
+}
+
+const handleTagChange = (val) => {
+  // in real app, suggestions could be fetched from backend
+  if (val.length > 0) {
+    var new_sug = []
+    tagList.forEach((t) => {
+      if (t.includes(val)) {
+        new_sug.push(t)
+      }
+    })
+    setSuggestions(new_sug)
+  } else {
+    setSuggestions([])
+  }
+}
+
 
        
       
@@ -222,7 +270,7 @@ function BlogSingle(props){
             FeaturedImage="https://createreactappautham774c4af455b14a6da80642ef720133830-devi.s3.us-east-2.amazonaws.com/public/"+file.name
           }
          fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post',{
-          
+        
              method:"PUT",
              headers: {
                 'Content-Type': 'application/json'
@@ -383,6 +431,13 @@ function BlogSingle(props){
           <br/>
           <label className="labelClass">Tags: </label>
           <input className="inputClass" type="text" value={tags} name="tags" onChange={event => setTags(event.target.value)} required></input>
+          <ReactTags
+      tags={tags}
+      suggestions={suggestions}
+      onAddHandler={(val) => addTag(val)}
+      onDeleteHandler={(idx) => removeTag(idx)}
+      onChangeHandler={(val) => handleTagChange(val)}
+    />
           <br/>
           <label className="labelClass">Follow: <span className="spanClass">*</span> </label>
           <select className="inputClass" onChange={event => setFollow(event.target.value)} required>

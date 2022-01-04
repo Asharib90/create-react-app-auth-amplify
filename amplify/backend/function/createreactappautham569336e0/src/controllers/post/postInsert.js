@@ -34,7 +34,7 @@ const  postInsert=(connection)=>(req,res)=>{
     date? 0: filter['date'] = newDate.getFullYear()+'-'+(newDate.getMonth()+1)+'-'+newDate.getDate() 
     category? filter['category']=category : 0
     author? filter['author']=author : 0
-    tags? filter['tags']=tags : filter['tags']=tags
+    tags? filter['tags']=tags.toString() : 0
     follow? filter['follow']=follow : 0
     timeToRead? filter['timeToRead']=timeToRead : 0 
     seo?filter['seo']=seo:0
