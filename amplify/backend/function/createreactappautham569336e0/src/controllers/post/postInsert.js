@@ -1,22 +1,13 @@
 const { response } = require("express");
 const axios = require('axios');
-const request = require('request');
+
 
 const filter = {}
 const  postInsert=(connection)=>(req,res)=>{ 
 
-  // var options = {
-  //   url: 'https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks?id=b8bb08f8-ed88-4b0b-aea7-91d73e7c6fb7&token=vGBI8XcK5Z8MGLu8TPb8017laqqzYKp0A35ELgkdFc',
-  //   'method': 'POST',
-  //    'body': [] 
-    
-  //   };
-    
-  //    request(options,function(error,response,body){
-  //      console.log(response)
-  //   });
-   
-  
+ 
+
+
     getValueForNextSequence(connection,"item_id")
     const {title,slug,link,contentTable,description,excerpt,featuredImage,featured,date,category,author,tags,follow,timeToRead, seo}=req.body
     const newDate = new Date();
@@ -52,28 +43,41 @@ const  postInsert=(connection)=>(req,res)=>{
     try {
       if(req.body.category==1)
       {
-        axios.post('https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks?id=b8bb08f8-ed88-4b0b-aea7-91d73e7c6fb7&token=vGBI8XcK5Z8MGLu8TPb8017laqqzYKp0A35ELgkdFc', {
-    body: []
-  }, { params: {
-    id: 'b8bb08f8-ed88-4b0b-aea7-91d73e7c6fb7', 
-    token: 'vGBI8XcK5Z8MGLu8TPb8017laqqzYKp0A35ELgkdFc'   
-  }}) 
-  .then(function (response) { 
-    console.log(response); 
-  }) 
+        axios
+  .post('https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks',
+   {
+    id: 'b8bb08f8-ed88-4b0b-aea7-91d73e7c6fb7',
+    token: 'vGBI8XcK5Z8MGLu8TPb8017laqqzYKp0A35ELgkdFc'
+  }
+  )
+  .then(res => {
+    console.log(`statusCode: ${res.status}`)
+    console.log(res)
+  })
+  .catch(error => {
+    console.error(error)
+  
+  })
      
       }
     else
       {
-        axios.post('https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks?id=fcdd9f38-ab8c-407c-814e-1d6ddd132d79&token=2aSSHXukua8PZG1nO6Z8ZgQkDcZy0tZesoaWP8011A', {
-       body: []
-  }, { params: {
-    id: 'fcdd9f38-ab8c-407c-814e-1d6ddd132d79', 
-    token: '2aSSHXukua8PZG1nO6Z8ZgQkDcZy0tZesoaWP8011A'   
-  }}) 
-  .then(function (response) { 
-    console.log(response); 
-  }) 
+        axios
+        .post('https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks',
+         {
+          id: 'fcdd9f38-ab8c-407c-814e-1d6ddd132d79',
+          token: '2aSSHXukua8PZG1nO6Z8ZgQkDcZy0tZesoaWP8011A'
+        }
+        )
+        .then(res => {
+          console.log(`statusCode: ${res.status}`)
+          console.log(res)
+        })
+        .catch(error => {
+          console.error(error)
+        
+        })
+           
     
       }
          
