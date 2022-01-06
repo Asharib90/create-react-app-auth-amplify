@@ -16,7 +16,7 @@ const viewsUpdate=(connection)=>(req,res)=>{
             const quotesCollection = post.updateOne({'_id':parseInt(id)},newvalues)
     .then(results => {
     try {
-        res.send(results);
+        res.send(newvalues);
       } catch (error) {
         res.status(500).send(error);
       }
