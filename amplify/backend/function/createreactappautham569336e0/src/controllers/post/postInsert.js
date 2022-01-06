@@ -1,17 +1,16 @@
 const { response } = require("express");
 const axios = require('axios');
-
+const https = require('https');
+const querystring = require('querystring');
 
 const filter = {}
 const  postInsert=(connection)=>(req,res)=>{ 
-
  
-
-
+ 
     getValueForNextSequence(connection,"item_id")
     const {title,slug,link,contentTable,description,excerpt,featuredImage,featured,date,category,author,tags,follow,timeToRead, seo}=req.body
     const newDate = new Date();
-    
+    const views=0;
     
 
     title? filter['title']=title : 0
@@ -29,7 +28,7 @@ const  postInsert=(connection)=>(req,res)=>{
     follow? filter['follow']=follow : 0
     timeToRead? filter['timeToRead']=timeToRead : 0 
     seo?filter['seo']=seo:0
-    
+    views? 0: filter['views']=views
     
     
 

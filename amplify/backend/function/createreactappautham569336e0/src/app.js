@@ -29,6 +29,10 @@ const {postSingleGet} = require('./controllers/post/postSingleGet');
 
 const {postUpdate} = require('./controllers/post/postUpdate');
 
+//update views in post
+
+const {viewsUpdate} = require('./controllers/post/viewsUpdate');
+
 // declare a new express app
 var app = express()
 app.use(cors());
@@ -152,6 +156,11 @@ app.delete('/post/*', function(req, res) {
   // Add your code here
   res.json({success: 'delete call succeed!', url: req.url});
 });
+
+
+//Update views method
+
+app.put('/viewsUpdate/:id',viewsUpdate(connection))
 
 app.listen(3001, function() {
     console.log("App started")

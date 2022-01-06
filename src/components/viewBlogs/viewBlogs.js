@@ -133,7 +133,7 @@ function ViewBlogs() {
                     pagination
                     defaultSortAsc={false}
                     highlightOnHover
-                />
+                 />
              
                  </DataTableExtensions>
                  </div> 
