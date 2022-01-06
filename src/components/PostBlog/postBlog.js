@@ -184,8 +184,8 @@ const handleTagChange = (val) => {
           //console.log('Success');
           const file = featuredImage;
 
-         fetch('http://localhost:3001/post',{
-          //https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post
+         fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post',{
+         
              method:"Post",
              headers: {
                 'Content-Type': 'application/json'
