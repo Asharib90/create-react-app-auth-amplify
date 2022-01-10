@@ -141,6 +141,8 @@ app.post('/post',postInsert(connection))
 
 app.put('/post',postUpdate(connection))
 
+app.put('/post/viewsUpdate/:id',viewsUpdate(connection))
+
 app.put('/post/*', function(req, res) {
   // Add your code here
   res.json({success: 'put call succeed!', url: req.url, body: req.body})
@@ -152,6 +154,8 @@ app.put('/post/*', function(req, res) {
 
 app.delete('/post' ,postDelete(connection))
 
+
+
 app.delete('/post/*', function(req, res) {
   // Add your code here
   res.json({success: 'delete call succeed!', url: req.url});
@@ -159,9 +163,6 @@ app.delete('/post/*', function(req, res) {
 
 
 //Update views method
-
-app.put('/viewsUpdate/:id',viewsUpdate(connection))
-
 app.listen(3001, function() {
     console.log("App started")
 });

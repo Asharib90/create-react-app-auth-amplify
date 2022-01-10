@@ -1,3 +1,5 @@
+const https = require('https');
+
 const postUpdate=(connection)=>(req,res)=>{ 
   
   const {id,title,slug,link,contentTable,description,excerpt,featuredImage,oldFeaturedImage,featured,date,category,author,tags, follow,timeToRead, seo}=req.body
@@ -24,10 +26,27 @@ const postUpdate=(connection)=>(req,res)=>{
     connection.then(client => {
     const post = client.db('news').collection('post')  
 
-    const quotesCollection = post.updateOne({'_id':parseInt(id)},{$set:filter})
+     post.updateOne({'_id':parseInt(id)},{$set:filter})
     .then(results => {
-    try {
-        res.send(results);
+       try {
+        res.send(results)
+        // const options = {
+        //   hostname: 'https://webhooks.amplify.us-east-2.amazonaws.com',
+        //   path: '/prod/webhooks',
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        //   params: {
+        //     id: '8569b580-4671-4261-b977-17f64cd426e5',
+        //     token: 'KmcKRqmGwSpWM8ohDhnk3pTmpFip5HXBx0P3dWY588'
+        //   }
+        // }
+        // https
+        // .request(options, res => {
+        //   console.log(`statusCode: ${res.statusCode}`)})
+         
+        
       } catch (error) {
         res.status(500).send(error);
       }

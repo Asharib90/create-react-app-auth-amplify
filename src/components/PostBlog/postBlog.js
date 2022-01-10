@@ -214,7 +214,17 @@ const handleTagChange = (val) => {
          }).then(response => {
                   console.log(response)
 
+                  fetch('https://cors-anywhere.herokuapp.com/https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks?id=8569b580-4671-4261-b977-17f64cd426e5&token=KmcKRqmGwSpWM8ohDhnk3pTmpFip5HXBx0P3dWY588',{
+                    method:"POST",
+                    headers: {
+                       'Content-Type': 'application/json',
+                       'Origin': 'https://master.dtgguekqbpk7r.amplifyapp.com/'
+                     },
+                     body:[]
+                  }).then(response => {
+                    console.log(response)
                   
+                  })
                
                 document.getElementById("blogForm").reset();
                 // setLoader(false)
