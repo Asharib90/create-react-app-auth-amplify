@@ -90,6 +90,7 @@ function PostBlog(){
       const [contentTable, setContentTable]=React.useState('');
       const [excerpt, setExcerpt] = React.useState('');
       const [featuredImage, setFeaturedImage] = React.useState("");
+      const [bannerImage, setBannerImage] = React.useState("");
       const [featured, setFeatured] = React.useState('');
       const [category, setCategory] = React.useState('');
       const [author, setAuthor] = React.useState('');
@@ -103,7 +104,7 @@ function PostBlog(){
       const [seoDescription, setSeoDescription] = React.useState('');
       const [seoKeywords, setSeoKeywords] = React.useState('');     
 
-
+      //upload featured Image
       const uploadImage = async(e) => {
         const file = e.target.files[0];
         setFeaturedImage(e.target.files[0])
@@ -128,6 +129,29 @@ function PostBlog(){
       }
 
 
+      //upload banner Image
+      const uploadBannerImage = async(e) => {
+        const file = e.target.files[0];
+        setBannerImage(e.target.files[0])
+     
+      try {
+            await Storage.put(file.name, file, {
+            //contentType: "image/png", // contentType is optional
+            resumable: true,
+            completeCallback: (event) => {
+                console.log(`Successfully uploaded ${event.key}`);
+            },
+            progressCallback: (progress) => {
+                console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+            },
+            errorCallback: (err) => {
+                console.error('Unexpected error while uploading', err);
+            }
+          });
+           } catch (error) {
+          console.log("Error uploading file: ", error);
+        }
+      }
      
 
   //fetch tags for suggestions
@@ -181,8 +205,11 @@ const handleTagChange = (val) => {
           return false;
         }
        
-          //console.log('Success');
+        
+          //featured Image
           const file = featuredImage;
+          //banner Images
+          const banner =bannerImage; 
 
          fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post',{
          
@@ -199,6 +226,7 @@ const handleTagChange = (val) => {
                 "description": convertedContent,
                 "excerpt": excerpt,
                 "featuredImage": "https://createreactappautham774c4af455b14a6da80642ef720133830-devi.s3.us-east-2.amazonaws.com/public/"+file.name,
+                "bannerImage": "https://createreactappautham774c4af455b14a6da80642ef720133830-devi.s3.us-east-2.amazonaws.com/public/"+banner.name,
                 "featured": featured,
                 "category": category,
                 "author": author,
@@ -319,6 +347,12 @@ const handleTagChange = (val) => {
            <input className="inputClass" type="file" name='featuredImage' accept="image/png, image/jpeg" onChange={event => uploadImage(event)} required></input>
          
            <br/>
+          
+           <label className="labelClass">Banner Image: <span className="spanClass">*</span></label>
+           <input className="inputClass" type="file" name='bannerImage' accept="image/png, image/jpeg" onChange={event => uploadBannerImage(event)}  required></input>
+         
+           <br/>
+
            <label className="labelClass">Featured: <span className="spanClass">*</span></label>
           <select className="inputClass" name="featured" onChange={event => setFeatured(event.target.value)}>
            <option value="">-Select Option-</option>   
