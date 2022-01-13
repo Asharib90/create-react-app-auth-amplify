@@ -17,7 +17,7 @@ import 'react-autocomplete-tag/dist/index.css' // load default style
 
 import awsconfig from '../../aws-exports';
 
-
+import Compressor from 'compressorjs';
 
 Amplify.configure(awsconfig);
 
@@ -104,53 +104,79 @@ function PostBlog(){
       const [seoDescription, setSeoDescription] = React.useState('');
       const [seoKeywords, setSeoKeywords] = React.useState('');     
 
+
+
+
       //upload featured Image
       const uploadImage = async(e) => {
         const file = e.target.files[0];
-        setFeaturedImage(e.target.files[0])
-     
-      try {
-            await Storage.put(file.name, file, {
-            //contentType: "image/png", // contentType is optional
-            resumable: true,
-            completeCallback: (event) => {
-                console.log(`Successfully uploaded ${event.key}`);
-            },
-            progressCallback: (progress) => {
-                console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
-            },
-            errorCallback: (err) => {
-                console.error('Unexpected error while uploading', err);
-            }
-          });
-           } catch (error) {
-          console.log("Error uploading file: ", error);
-        }
+        
+
+        new Compressor(file, {
+          quality: 0.8, // 0.6 can also be used, but its not recommended to go below.
+          success: (compressedResult) => {
+            // compressedResult has the compressed file.
+            // Use the compressed file to upload the images to your server.        
+            setFeaturedImage(compressedResult)
+            
+            try {
+                  Storage.put(compressedResult.name, compressedResult, {
+                  //contentType: "image/png", // contentType is optional
+                  resumable: true,
+                  completeCallback: (event) => {
+                      console.log(`Successfully uploaded ${event.key}`);
+                  },
+                  progressCallback: (progress) => {
+                      console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+                  },
+                  errorCallback: (err) => {
+                      console.error('Unexpected error while uploading', err);
+                  }
+                });
+                 } catch (error) {
+                console.log("Error uploading file: ", error);
+              }
+          },
+        });
+
+       
+    
       }
 
 
       //upload banner Image
       const uploadBannerImage = async(e) => {
         const file = e.target.files[0];
-        setBannerImage(e.target.files[0])
+
+        new Compressor(file, {
+          quality: 0.8, // 0.6 can also be used, but its not recommended to go below.
+          success: (compressedResult) => {
+            // compressedResult has the compressed file.
+            // Use the compressed file to upload the images to your server.        
+            setBannerImage(compressedResult)
+            try {
+              Storage.put(compressedResult.name, compressedResult, {
+              //contentType: "image/png", // contentType is optional
+              resumable: true,
+              completeCallback: (event) => {
+                  console.log(`Successfully uploaded ${event.key}`);
+              },
+              progressCallback: (progress) => {
+                  console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+              },
+              errorCallback: (err) => {
+                  console.error('Unexpected error while uploading', err);
+              }
+            });
+             } catch (error) {
+            console.log("Error uploading file: ", error);
+          }
+          },
+        });
+
+       
      
-      try {
-            await Storage.put(file.name, file, {
-            //contentType: "image/png", // contentType is optional
-            resumable: true,
-            completeCallback: (event) => {
-                console.log(`Successfully uploaded ${event.key}`);
-            },
-            progressCallback: (progress) => {
-                console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
-            },
-            errorCallback: (err) => {
-                console.error('Unexpected error while uploading', err);
-            }
-          });
-           } catch (error) {
-          console.log("Error uploading file: ", error);
-        }
+     
       }
      
 

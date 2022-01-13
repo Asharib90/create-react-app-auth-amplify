@@ -15,6 +15,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import ReactTags from 'react-autocomplete-tag' // load ReactTags component
 import 'react-autocomplete-tag/dist/index.css' // load default style
+import Compressor from 'compressorjs';
 
 
 import awsconfig from '../../aws-exports';
@@ -59,24 +60,33 @@ function BlogSingle(props){
     if (event.target.files && event.target.files[0]) {
       setImage(URL.createObjectURL(event.target.files[0]));
       const file = event.target.files[0];
-      setFeaturedImage(event.target.files[0]);
-      try {
-        await Storage.put(file.name, file, {
-        //contentType: "image/png", // contentType is optional
-        resumable: true,
-        completeCallback: (event) => {
-            console.log(`Successfully uploaded ${event.key}`);
-        },
-        progressCallback: (progress) => {
-            console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
-        },
-        errorCallback: (err) => {
-            console.error('Unexpected error while uploading', err);
+      new Compressor(file, {
+        quality: 0.8, // 0.6 can also be used, but its not recommended to go below.
+        success: (compressedResult) => {
+          // compressedResult has the compressed file.
+          // Use the compressed file to upload the images to your server.        
+          setFeaturedImage(compressedResult);
+          try {
+            Storage.put(compressedResult.name, compressedResult, {
+            //contentType: "image/png", // contentType is optional
+            resumable: true,
+            completeCallback: (event) => {
+                console.log(`Successfully uploaded ${event.key}`);
+            },
+            progressCallback: (progress) => {
+                console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+            },
+            errorCallback: (err) => {
+                console.error('Unexpected error while uploading', err);
+            }
+          });
+           } catch (error) {
+          console.log("Error uploading file: ", error);
         }
+        },
       });
-       } catch (error) {
-      console.log("Error uploading file: ", error);
-    }
+     
+ 
     }
    }
 
@@ -87,24 +97,33 @@ function BlogSingle(props){
     if (event.target.files && event.target.files[0]) {
       setBannerImageChange(URL.createObjectURL(event.target.files[0]));
       const file = event.target.files[0];
-      setBannerImage(event.target.files[0]);
-      try {
-        await Storage.put(file.name, file, {
-        //contentType: "image/png", // contentType is optional
-        resumable: true,
-        completeCallback: (event) => {
-            console.log(`Successfully uploaded ${event.key}`);
-        },
-        progressCallback: (progress) => {
-            console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
-        },
-        errorCallback: (err) => {
-            console.error('Unexpected error while uploading', err);
+      new Compressor(file, {
+        quality: 0.8, // 0.6 can also be used, but its not recommended to go below.
+        success: (compressedResult) => {
+          // compressedResult has the compressed file.
+          // Use the compressed file to upload the images to your server.        
+          setBannerImage(compressedResult);
+          try {
+            Storage.put(compressedResult.name, compressedResult, {
+            //contentType: "image/png", // contentType is optional
+            resumable: true,
+            completeCallback: (event) => {
+                console.log(`Successfully uploaded ${event.key}`);
+            },
+            progressCallback: (progress) => {
+                console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+            },
+            errorCallback: (err) => {
+                console.error('Unexpected error while uploading', err);
+            }
+          });
+           } catch (error) {
+          console.log("Error uploading file: ", error);
         }
+        },
       });
-       } catch (error) {
-      console.log("Error uploading file: ", error);
-    }
+     
+     
     }
    }
    
