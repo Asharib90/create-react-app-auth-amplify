@@ -461,7 +461,7 @@ const handleTagChange = (val) => {
            <label className="labelClass">Excerpt: <span className="spanClass">*</span></label>
            <input className="inputClass" type="text" name="excerpt" value={excerpt} onChange={event => setExcerpt(event.target.value)} required/>
            <br/>  <br/>
-           <label className="labelClass">Featured Image: <span className="spanClass">*</span></label>
+           <label className="labelClass">Featured Image (360 x 470): <span className="spanClass">*</span></label>
          <br/>
            {/* <img className="featured-image" src={posts.featuredImage} alt="Featured-Image"></img> */}
          
@@ -469,6 +469,8 @@ const handleTagChange = (val) => {
            <input type="file" onChange={onImageChange} className="inputClass" accept="image/png, image/jpeg" />
            {/* <input className="inputClass" type="file" name='featuredImage' accept="image/png, image/jpeg" onChange={event => setFeaturedImage(event.target.files[0])}></input> */}
            
+           <br/>
+           <label className="labelClass">Banner Image (1600 x 650): <span className="spanClass">*</span></label>
            <br/>
            <img src={bannerImageChange} alt="Banner-Image" className="banner-image"/>
            <input type="file" onChange={onBannerImageChange} className="inputClass" accept="image/png, image/jpeg" />
