@@ -366,7 +366,13 @@ const handleTagChange = (val) => {
           image: {
             uploadCallback: uploadImageCallBack,
             alt: {present:true,mandatory: false},
-          }
+          },
+          fontFamily: {
+            options: ['Arial', 'Georgia', 'Impact', 'Tahoma', 'Times New Roman', 'Verdana','Noto Nastaliq Urdu'],
+            className: undefined,
+            component: undefined,
+            dropdownClassName: undefined,
+          },
         }}
        
       />
