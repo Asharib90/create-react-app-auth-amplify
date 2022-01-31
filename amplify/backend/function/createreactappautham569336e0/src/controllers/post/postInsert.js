@@ -8,7 +8,7 @@ const  postInsert=(connection)=>(req,res)=>{
  
  
     getValueForNextSequence(connection,"item_id")
-    const {title,slug,link,contentTable,description,excerpt,featuredImage,bannerImage,featured,date,category,author,tags,follow,timeToRead, seo}=req.body
+    const {title,slug,link,contentTable,description,excerpt,featuredImage,bannerImage,featured,date,category,author,tags,follow,language,timeToRead, seo}=req.body
     const newDate = new Date();
     const views=0;
     
@@ -27,6 +27,7 @@ const  postInsert=(connection)=>(req,res)=>{
     author? filter['author']=author : 0
     tags? filter['tags']=tags.toString() : 0
     follow? filter['follow']=follow : 0
+    language? filter['language']=language : 0
     timeToRead? filter['timeToRead']=timeToRead : 0 
     seo?filter['seo']=seo:0
     views? 0: filter['views']=views

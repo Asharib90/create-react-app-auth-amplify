@@ -98,6 +98,7 @@ function PostBlog(){
       const [suggestions, setSuggestions] = React.useState([])
       const[tagListFinal, setTagList] = React.useState([])
       const [follow,setFollow] = React.useState('');
+      const [language,setLanguage] = React.useState('');
       //SEO fields
        
       const [seoTitle, setSeoTitle] = React.useState('');
@@ -238,7 +239,6 @@ const handleTagChange = (val) => {
           const banner =bannerImage; 
 
          fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post',{
-         
              method:"Post",
              headers: {
                 'Content-Type': 'application/json'
@@ -259,6 +259,7 @@ const handleTagChange = (val) => {
                 "tags": tags,
                 "follow":follow,
                 "timeToRead":time,
+                "language":language,
                 "seo": {
                   "title": seoTitle,
                   "description": seoDescription,
@@ -439,7 +440,14 @@ const handleTagChange = (val) => {
            <option value="Yes">Yes</option>
            <option value="No">No</option>
           </select>
-        
+          <br/>
+          <label className="labelClass">Language: <span className="spanClass">*</span> </label>
+          <select className="inputClass" onChange={event => setLanguage(event.target.value)} required>
+          <option value="">-Select One-</option>
+           <option value="Eng">Eng</option>
+           <option value="Urdu">Urdu</option>
+          </select>
+
           <h2 style={{textAlign:'left'}}>SEO</h2>
           <label className="labelClass">SEO Title: <span className="spanClass">*</span></label>
           <input className="inputClass" type="text" name="seo-title" onChange={event => setSeoTitle(event.target.value)} required></input>
