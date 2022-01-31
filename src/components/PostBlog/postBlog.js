@@ -267,8 +267,9 @@ const handleTagChange = (val) => {
             })
          }).then(response => {
                   console.log(response)
-
-                  fetch('https://cors-anywhere.herokuapp.com/https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks?id=8569b580-4671-4261-b977-17f64cd426e5&token=KmcKRqmGwSpWM8ohDhnk3pTmpFip5HXBx0P3dWY588',{
+                   if(category=='1')
+                   {
+                  fetch('https://cors-anywhere.herokuapp.com/https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks?id=7da208b0-b1d4-4c3e-be3e-2ad197e9434b&token=G4FOQ6XB1c3bVVk4cOsXSmCyyCjgyh7cz66Hq0gTfY',{
                     method:"POST",
                     headers: {
                        'Content-Type': 'application/json',
@@ -279,6 +280,21 @@ const handleTagChange = (val) => {
                     console.log(response)
                   
                   })
+                }
+                else if(category=='2')
+                {
+                  fetch('https://cors-anywhere.herokuapp.com/https://webhooks.amplify.us-east-2.amazonaws.com/prod/webhooks?id=fcdd9f38-ab8c-407c-814e-1d6ddd132d79&token=2aSSHXukua8PZG1nO6Z8ZgQkDcZy0tZesoaWP8011A',{
+                    method:"POST",
+                    headers: {
+                       'Content-Type': 'application/json',
+                       'Origin': 'https://master.dtgguekqbpk7r.amplifyapp.com/'
+                     },
+                     body:[]
+                  }).then(response => {
+                    console.log(response)
+                  
+                  })
+                }
                
                 document.getElementById("blogForm").reset();
                 // setLoader(false)
