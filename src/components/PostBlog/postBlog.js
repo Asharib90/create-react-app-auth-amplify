@@ -239,6 +239,7 @@ const handleTagChange = (val) => {
           const banner =bannerImage; 
 
          fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post',{
+         
              method:"Post",
              headers: {
                 'Content-Type': 'application/json'

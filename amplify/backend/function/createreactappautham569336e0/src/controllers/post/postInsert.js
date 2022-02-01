@@ -5,11 +5,19 @@ const querystring = require('querystring');
 
 const filter = {}
 const  postInsert=(connection)=>(req,res)=>{ 
- 
- 
+        
+//   const newDate = new Date();
+//   const monthNames = ["January", "February", "March", "April", "May", "June",
+//   "July", "August", "September", "October", "November", "December"
+// ];
+
+//   console.log((monthNames[newDate.getMonth()])+' '+newDate.getDate()+','+newDate.getFullYear());
     getValueForNextSequence(connection,"item_id")
     const {title,slug,link,contentTable,description,excerpt,featuredImage,bannerImage,featured,date,category,author,tags,follow,language,timeToRead, seo}=req.body
     const newDate = new Date();
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
     const views=0;
     
 
@@ -22,7 +30,7 @@ const  postInsert=(connection)=>(req,res)=>{
     featuredImage? filter['featuredImage']=featuredImage : 0
     bannerImage? filter['bannerImage']=bannerImage : 0
     featured? filter['featured']=featured : filter['featured']=featured
-    date? 0: filter['date'] = newDate.getFullYear()+'-'+(newDate.getMonth()+1)+'-'+newDate.getDate() 
+    date? 0: filter['date'] = (monthNames[newDate.getMonth()])+' '+newDate.getDate()+', '+newDate.getFullYear() 
     category? filter['category']=category : 0
     author? filter['author']=author : 0
     tags? filter['tags']=tags.toString() : 0
