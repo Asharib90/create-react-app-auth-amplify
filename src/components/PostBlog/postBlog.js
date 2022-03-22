@@ -63,8 +63,7 @@ function PostBlog(){
         setConvertedContent(currentContentAsHTML);
       }
       
-
-    
+     
       
       //calculate time to read
       const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
@@ -289,7 +288,7 @@ const handleTagChange = (val) => {
                     method:"POST",
                     headers: {
                        'Content-Type': 'application/json',
-                       'Origin': 'https://master.dtgguekqbpk7r.amplifyapp.com/'
+                       'Origin': 'http://localhost:3000/'
                      },
                      body:[]
                   }).then(response => {
@@ -422,6 +421,7 @@ const handleTagChange = (val) => {
            <option value="">-Select One-</option>
            <option value="1">Arif Mustafa</option>
            <option value="2">Aamir Saeeduddin</option>
+           <option value="3">Ushbah Khan</option>
           </select>
 
           <br/>
