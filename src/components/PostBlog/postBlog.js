@@ -414,6 +414,7 @@ const handleTagChange = (val) => {
            <option value="">-Select One-</option>
            <option value="1">Star Blogs</option>
            <option value="2">Star News</option>
+           <option value="3">Star Web</option>
           </select>
           <br/>
           <label className="labelClass">Author: <span className="spanClass">*</span></label>

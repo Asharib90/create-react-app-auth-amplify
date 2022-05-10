@@ -510,6 +510,7 @@ const handleTagChange = (val) => {
         
            {category=='1'?<option value="1" selected>Star Blogs</option>:<option value="1">Star Blogs</option>}
            {category=='2'?<option value="2" selected>Star News</option>:<option value="2">Star News</option>}
+           {category=='3'?<option value="3" selected>Star Web</option>:<option value="3">Star Web</option>}
           </select>
         
           <br/>
