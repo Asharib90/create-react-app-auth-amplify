@@ -424,6 +424,7 @@ const handleTagChange = (val) => {
            <option value="2">Aamir Saeeduddin</option>
            <option value="3">Ushbah Khan</option>
            <option value="4">Ahmad Bin Abdul Wahab</option>
+           <option value="5">Asad</option>
           </select>
 
           <br/>

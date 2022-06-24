@@ -29,6 +29,7 @@ function ViewBlogs() {
         fetchPosts();
     }, []);
 
+
     const deletePost = async (e,index) => {
         
        //working needs to be done

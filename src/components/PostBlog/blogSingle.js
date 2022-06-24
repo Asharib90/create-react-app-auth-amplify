@@ -521,6 +521,7 @@ const handleTagChange = (val) => {
          {author=='2'? <option value="2" selected>Aamir Saeeduddin</option>:<option value="2">Aamir Saeeduddin</option>}
          {author=='3'? <option value="3" selected>Ushbah Khan</option>:<option value="3">Ushbah Khan</option>}
          {author=='4'? <option value="4" selected>Ahmad Bin Abdul Wahab</option>:<option value="4">Ahmad Bin Abdul Wahab</option>}
+         {author=='5'? <option value="5" selected>Asad</option>:<option value="5">Asad</option>}
          
           </select>
 
