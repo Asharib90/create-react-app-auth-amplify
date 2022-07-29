@@ -13,6 +13,12 @@ var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware'
 const cors = require('cors')
 const MongoClient = require('mongodb').MongoClient
 const { getForm, addOrUpdateForm} = require('./dynamo');
+
+
+const {newsPostGet} = require('./controllers/post/newsPostGet');
+const {blogPostGet} = require('./controllers/post/blogPostGet');
+const {webPostGet} = require('./controllers/post/webPostGet');
+
 //insert post
 
 const { postInsert } = require('./controllers/post/postInsert');
@@ -89,6 +95,10 @@ app.get('/', function(req, res) {
   // Add your code here
   res.json({success: 'get call succeed!'});
 });
+
+app.get('/newsPost',newsPostGet(connection))
+app.get('/blogPost',blogPostGet(connection))
+app.get('/webPost',webPostGet(connection))
 
 // app.get('/post/*', function(req, res) {
 //   // Add your code here
