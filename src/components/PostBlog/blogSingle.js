@@ -325,8 +325,8 @@ const handleTagChange = (val) => {
       {
         BannerImage = "https://createreactappautham774c4af455b14a6da80642ef720133830-devi.s3.us-east-2.amazonaws.com/public/"+banner.name
       }
-         fetch('http://localhost:3001/post',{
-      //https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post
+         fetch('https://zlmxumtllh.execute-api.us-east-2.amazonaws.com/devi/post',{
+     
              method:"PUT",
              headers: {
                 'Content-Type': 'application/json'
