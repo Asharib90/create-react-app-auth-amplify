@@ -19,7 +19,7 @@ const postUpdate=(connection)=>(req,res)=>{
     featuredImage? filter['featuredImage']=featuredImage : 0
     bannerImage? filter['bannerImage']=bannerImage : 0
     featured? filter['featured']=featured : filter['featured']=featured
-    date? 0: filter['date'] = (monthNames[newDate.getMonth()])+' '+newDate.getDate()+', '+newDate.getFullYear() 
+    //date? 0: filter['date'] = (monthNames[newDate.getMonth()])+' '+newDate.getDate()+', '+newDate.getFullYear() 
     category? filter['category']=category : 0
     author? filter['author']=author : 0
     tags? filter['tags']=tags.toString() : 0
