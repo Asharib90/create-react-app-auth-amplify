@@ -14,7 +14,7 @@ const cors = require('cors')
 const MongoClient = require('mongodb').MongoClient
 const { getForm, addOrUpdateForm} = require('./dynamo');
 
-
+const {postGet} = require('./controllers/post/postGet');
 const {newsPostGet} = require('./controllers/post/newsPostGet');
 const {blogPostGet} = require('./controllers/post/blogPostGet');
 const {webPostGet} = require('./controllers/post/webPostGet');
@@ -87,10 +87,13 @@ app.use(function(req, res, next) {
  * Example get method *
  **********************/
 
- app.get('/post', function(req, res) {
-  // Add your code here
-  res.json({success: 'get call succeed!', url: req.url});
-});
+//  app.get('/post', function(req, res) {
+//   // Add your code here
+//   res.json({success: 'get call succeed!', url: req.url});
+// });
+
+app.get('/post',postGet(connection))
+
 app.get('/', function(req, res) {
   // Add your code here
   res.json({success: 'get call succeed!'});
