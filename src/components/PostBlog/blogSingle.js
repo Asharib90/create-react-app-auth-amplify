@@ -247,7 +247,7 @@ function BlogSingle(props){
     
   React.useEffect(function effectFunction() {
     async function fetchSuggestions() {
-        const response = await fetch('https://newsserverapi.herokuapp.com/tags');
+        const response = await fetch('https://news-api.starmarketingonline.com/tags');
         const json = await response.json();
         setTagList(json);
        

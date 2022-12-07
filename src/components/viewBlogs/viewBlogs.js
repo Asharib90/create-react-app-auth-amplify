@@ -20,7 +20,7 @@ function ViewBlogs() {
 
     React.useEffect(function effectFunction() {
         async function fetchPosts() {
-            const response = await fetch('https://newsserverapi.herokuapp.com/post');
+            const response = await fetch('https://news-api.starmarketingonline.com/post');
             const json = await response.json();
             //console.log(json);
             updatePosts(json);
